@@ -34,9 +34,9 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
+        <button class="btn btn-secondary" @click="go_back()">Go Back</button>
     </div>
 </template>
 
@@ -48,6 +48,11 @@
             return {
                 taskgroups: []
             };
+        },
+        methods: {
+            go_back() {
+                this.$router.go(-1);
+            }
         },
         mounted: function() {
             get_task_groups_api().then(

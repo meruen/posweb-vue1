@@ -5,7 +5,8 @@
             <p class="lead">poweb-component-test</p>
             <hr class="my-4">
             <p class="lead">
-                <button class="btn btn-primary btn-lg" @click="go_to_login()">Users Component</button>
+                <button class="btn btn-primary btn-lg" @click="go_to_login()">Login</button>
+                <button class="btn btn-secondary btn-lg ml-2" @click="logout()">Logout</button>
                 <button class="btn btn-primary btn-lg ml-2" @click="got_to_list_task_groups()">List Task Groups</button>
             </p>
         </div>
@@ -25,6 +26,9 @@
             },
             got_to_list_task_groups() {
                 this.$router.push({ name: "taskgroups"})
+            },
+            logout() {
+                localStorage.removeItem("token");
             }
         }
     };

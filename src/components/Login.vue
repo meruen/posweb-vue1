@@ -41,6 +41,7 @@
                   result => {
                       localStorage.token = result.data.token;
                       console.log(result.data);
+                      this.$router.push({name: 'taskgroups'})
                   },
                   error => console.log(error.response.data.error_message)
                 );
