@@ -9,14 +9,14 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" @input="username = $event.target.value" class="form-control" id="username"/>
+                            <input type="text" v-model="username" class="form-control" id="username"/>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" @input="password = $event.target.value" class="form-control" id="password" autocomplete="new-password"/>
+                            <input type="password" v-model="password" class="form-control" id="password" autocomplete="new-password"/>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary">Submit</button>
+                            <button @click="do_login('aaa', 'aaaa')" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -31,6 +31,18 @@
             return {
                 username: "",
                 password: ""
+            }
+        },
+        methods: {
+            do_login(username, password) {
+                const url = 'https://edimossilva-task-manager.herokuapp.com/auth/login';
+                const params = {username, password};
+                this.$http.post(url, params).then(
+                    result => console.log(result.data),
+                    error => {
+                        console.log(error.response)
+                    }
+                );
             }
         }
     };
