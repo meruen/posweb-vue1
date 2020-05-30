@@ -16,7 +16,7 @@
                             <input type="password" v-model="password" class="form-control" id="password" autocomplete="new-password"/>
                         </div>
                         <div class="form-group">
-                            <button @click="do_login('aaa', 'aaaa')" class="btn btn-primary">Submit</button>
+                            <button @click="do_login(username, password)" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -39,9 +39,7 @@
                 const params = {username, password};
                 this.$http.post(url, params).then(
                     result => console.log(result.data),
-                    error => {
-                        console.log(error.response)
-                    }
+                    error => console.log(error.response)
                 );
             }
         }
