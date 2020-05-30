@@ -1,6 +1,7 @@
 import Login from "./components/Login";
 import Home from "./components/Home";
 import ListTaskGroup from "./components/ListTaskGroup";
+import ShowTaskGroup from "@/components/ShowTaskGroup";
 
 export const routes = [
     {
@@ -17,6 +18,14 @@ export const routes = [
         name: 'taskgroups',
         path: '/taskgroups',
         component: ListTaskGroup,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: 'showtaskgroup',
+        path: '/taskgroup/:id',
+        component: ShowTaskGroup,
         meta: {
             requiresAuth: true
         }
