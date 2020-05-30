@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5 mb-5">
+        <div class="row mt-5 mb-5 mx-auto">
             <div class="col-12">
                 <div class="card" style="width: 500px;">
                     <div class="card-header">
@@ -16,7 +16,8 @@
                             <input type="password" v-model="password" class="form-control" id="password" autocomplete="new-password"/>
                         </div>
                         <div class="form-group">
-                            <button @click="do_login(username, password)" class="btn btn-primary">Submit</button>
+                            <button @click="do_login(username, password)" class="btn btn-primary">Login</button>
+                            <button @click="go_back()" class="btn btn-secondary ml-2">Voltar</button>
                         </div>
                     </div>
                 </div>
@@ -37,9 +38,15 @@
         methods: {
             do_login(username, password) {
                 do_login_api(username, password).then(
-                  result => console.log(result.data),
+                  result => {
+                      localStorage.token = result.data.token;
+                      console.log(result.data);
+                  },
                   error => console.log(error.response.data.error_message)
                 );
+            },
+            go_back() {
+                this.$router.go(-1);
             }
         }
     };
