@@ -14,26 +14,35 @@
                     </div>
                     <div class="form-goup col-12">
                         <div class="form-group">
-                            <label for="name">Description</label>
+                            <label for="description">Description</label>
                             <input type="text" class="form-control" id="description" :value="taskitem.description" disabled>
                         </div>
                     </div>
                     <div class="form-goup col-12">
                         <div class="form-group">
-                            <label for="name">Frequence Type</label>
+                            <label for="frequence_type">Frequence Type</label>
                             <input type="text" class="form-control" id="frequence_type" :value="taskitem.frequence_type" disabled>
                         </div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <list-task-items :taskitems="taskgroup.task_in_lists"></list-task-items>
+                </div>
+                <div class="col-12">
+                    {{ overview }}
+                </div>
             </div>
         </div>
+        <button class="btn btn-secondary" @click="go_back()">Go Back</button>
     </div>
 </template>
 
 <script>
     import {get_task_group_api} from "@/services/api";
+    import ListTaskItems from "@/components/ListTaskItems";
 
     export default {
+        components: {ListTaskItems},
         props: ["id"],
         data() {
             return {
@@ -44,6 +53,21 @@
             get_task_group_api(this.id).then(response => {
                 this.taskgroup = response.data.data;
             });
+        },
+        methods: {
+            go_back() {
+                this.$router.push({ name: 'taskgroups'})
+            },
+            is_task_item_checked(item) {
+                return !!item.checked;
+            }
+        },
+        computed: {
+            overview: function() {
+                const total_count = this.taskgroup.task_in_lists.length;
+                const check_count = this.taskgroup.task_in_lists.filter(this.is_task_item_checked).length;
+                return `${check_count} of ${total_count} task items are checked`
+            }
         }
     };
 </script>

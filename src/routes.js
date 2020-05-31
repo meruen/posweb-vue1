@@ -41,6 +41,6 @@ export const routes = [
         }
     },
     {
-        path: '*', component: Login
+        path: '*', component: Home
     }
 ]
