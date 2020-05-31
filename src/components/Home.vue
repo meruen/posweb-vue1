@@ -9,7 +9,6 @@
                 <button v-if="!is_logged()" class="btn btn-primary btn-lg" @click="go_to_login()">Login</button>
                 <button v-if="is_logged()" class="btn btn-danger btn-lg ml-2" @click="logout()">Logout</button>
                 <button v-if="is_logged()" class="btn btn-primary btn-lg ml-2" @click="got_to_list_task_groups()">List Task Groups</button>
-                <button v-if="is_logged()" class="btn btn-success btn-lg ml-2" @click="post_task_group()">Post a test</button>
             </p>
         </div>
     </div>

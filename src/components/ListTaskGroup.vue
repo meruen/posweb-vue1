@@ -44,6 +44,7 @@
             </div>
         </div>
         <button class="btn btn-secondary" @click="go_back()">Go Back</button>
+        <button class="btn btn-primary ml-2" @click="add_task_group()">Add New</button>
     </div>
 </template>
 
@@ -64,6 +65,9 @@
                 delete_task_group_api(id).then(function() {
                    location.reload();
                 });
+            },
+            add_task_group() {
+                this.$router.push({ name: 'newtaskgroup'})
             }
         },
         mounted: function() {
