@@ -64,8 +64,14 @@
         },
         computed: {
             overview: function() {
-                const total_count = this.taskgroup.task_in_lists.length;
-                const check_count = this.taskgroup.task_in_lists.filter(this.is_task_item_checked).length;
+                let total_count = 0;
+                let check_count = 0;
+
+                if (this.taskgroup.task_in_lists) {
+                    total_count = this.taskgroup.task_in_lists.length;
+                    check_count = this.taskgroup.task_in_lists.filter(this.is_task_item_checked).length;
+                }
+
                 return `${check_count} of ${total_count} task items are checked`
             }
         }

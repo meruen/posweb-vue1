@@ -3,6 +3,7 @@ import axios from "axios";
 const HOST = 'https://edimossilva-task-manager.herokuapp.com';
 const LOGIN_URL = HOST + '/auth/login';
 const TASKGROUP_URL = HOST + '/task_lists';
+const TASKITEM_URL = HOST + '/task_in_lists';
 
 export const get_request_config = () => {
     const token = localStorage.getItem("token");
@@ -47,4 +48,12 @@ export const post_task_group_api = (name, description, frequence_type) => {
 
 export const delete_task_group_api = (id) => {
     return axios.delete(TASKGROUP_URL + '/' + id.toString(), get_request_config());
+};
+
+export const update_task_item_api = (taskitem) => {
+    const url = TASKITEM_URL + '/' + taskitem.id.toString();
+    const params = {
+        checked:  taskitem.checked
+    }
+    return axios.put(url, params, get_request_config())
 }
