@@ -46,12 +46,13 @@
         props: ["id"],
         data() {
             return {
-                taskgroup: {}
+                taskgroup: this.$store.state.taskgroup
             };
         },
         mounted: function() {
             get_task_group_api(this.id).then(response => {
-                this.taskgroup = response.data.data;
+                this.$store.commit('taskgroup', response.data.data);
+                //this.taskgroup = response.data.data;
             });
         },
         methods: {

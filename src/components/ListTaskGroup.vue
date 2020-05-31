@@ -59,7 +59,7 @@
         },
         methods: {
             go_back() {
-                this.$router.go(-1);
+                this.$router.push({ name: 'home' })
             },
             delete_task_group(id) {
                 delete_task_group_api(id).then(function() {
