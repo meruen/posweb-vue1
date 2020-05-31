@@ -7,12 +7,14 @@
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Frequency Type</th>
-                        <th>Created at.</th>
-                        <th>Act</th>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Frequency Type</th>
+                            <th>Created at.</th>
+                            <th>Act</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <tr v-for="taskgroup in taskgroups" :key="taskgroup.id">
@@ -21,7 +23,7 @@
                         <td>{{taskgroup.description}}</td>
                         <td>{{taskgroup.frequence_type}}</td>
                         <td>{{taskgroup.created_at}}</td>
-                        <td><router-link :to="{ name: 'showtaskgroup', params: { id: taskgroup.id} }">LINK</router-link> </td>
+                        <td><router-link :to="{ name: 'showtaskgroup', params: { id: taskgroup.id} }">Details</router-link> </td>
                     </tr>
                     </tbody>
                 </table>

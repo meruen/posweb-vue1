@@ -26,6 +26,7 @@ export const routes = [
         name: 'showtaskgroup',
         path: '/taskgroup/:id',
         component: ShowTaskGroup,
+        props: true,
         meta: {
             requiresAuth: true
         }
