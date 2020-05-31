@@ -6,6 +6,7 @@
             <th>Checked</th>
             <th>Name</th>
             <th>Descr.</th>
+            <th>Act</th>
         </tr>
         </thead>
         <tbody>
@@ -18,13 +19,18 @@
             </td>
             <td>{{item.name}}</td>
             <td>{{item.description}}</td>
+            <td>
+                <button class="btn btn-danger btn-sm" @click="delete_task_item(item)">Remove</button>
+                <router-link class="btn btn-primary btn-sm ml-3" :to="{ name: 'formtaskitem', params: { id: item.task_id} }">Edit</router-link>
+            </td>
         </tr>
         </tbody>
     </table>
 </template>
 
 <script>
-    import { update_task_item_api} from "@/services/api";
+    import { update_task_item_api, delete_task_item_api} from "@/services/api";
+    import {mapState} from "vuex";
 
     export default {
         methods: {
@@ -38,12 +44,16 @@
                     this.$store.commit("taskitem", new_task_item);
                     console.log(result.data.data);
                 })
+            },
+            delete_task_item(item) {
+                delete_task_item_api(item).then(function() {
+                    location.reload();
+                })
             }
         },
         computed: {
-            taskitems() {
-                return this.$store.state.taskitems;
-            },
+            ... mapState(['taskitems']),
+
             format_task_items() {
                 let list = this.taskitems;
                 if (list == null || list.empty) {
@@ -55,7 +65,8 @@
                         id: item.id,
                         checked: item.checked,
                         name: item.task.name,
-                        description: item.task.description
+                        description: item.task.description,
+                        task_id: item.task.id
                     }
                 });
 

@@ -57,3 +57,38 @@ export const update_task_item_api = (taskitem) => {
     }
     return axios.put(url, params, get_request_config())
 }
+
+export const delete_task_item_api = (taskitem) => {
+    return axios.delete(TASKITEM_URL + '/' + taskitem.id.toString(), get_request_config());
+};
+
+
+export const create_task_item_api = (task, tasklistId) => {
+    const taskWithTaskListUrl = `https://edimossilva-task-manager.herokuapp.com/tasks`;
+    const params = {
+        name: task.name,
+        description: task.description
+    };
+    console.log(task.name);
+    console.log(tasklistId);
+    axios.post(taskWithTaskListUrl, params, get_request_config()).then(response => {
+       const task_id = response.data.data.id;
+       const task_in_list_prams = {
+           task_id: task_id,
+           task_list_id: tasklistId,
+           checked: task.checked
+       }
+       axios.post('https://edimossilva-task-manager.herokuapp.com/task_in_lists', task_in_list_prams, get_request_config()).then(function() {
+           location.reload();
+       });
+    });
+}
+
+export const update_item_api = (id, name) => {
+    const url = 'https://edimossilva-task-manager.herokuapp.com/tasks/' + id.toString();
+    const params = {
+        id: id,
+        name: name
+    }
+    return axios.put(url, params, get_request_config())
+}
