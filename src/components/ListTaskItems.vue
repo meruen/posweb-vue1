@@ -27,7 +27,6 @@
     import { update_task_item_api} from "@/services/api";
 
     export default {
-        props: ['taskitems'],
         methods: {
             update_task_item(item) {
                 const new_task_item = {
@@ -36,11 +35,15 @@
                 }
 
                 update_task_item_api(new_task_item).then(result => {
+                    this.$store.commit("taskitem", new_task_item);
                     console.log(result.data.data);
                 })
             }
         },
         computed: {
+            taskitems() {
+                return this.$store.state.taskitems;
+            },
             format_task_items() {
                 let list = this.taskitems;
                 if (list == null || list.empty) {
