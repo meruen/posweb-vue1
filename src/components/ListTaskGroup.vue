@@ -23,7 +23,10 @@
                         <td>{{taskgroup.description}}</td>
                         <td>{{taskgroup.frequence_type}}</td>
                         <td>{{taskgroup.created_at}}</td>
-                        <td><router-link :to="{ name: 'showtaskgroup', params: { id: taskgroup.id} }">Details</router-link> </td>
+                        <td>
+                            <router-link class="btn btn-primary btn-sm" :to="{ name: 'showtaskgroup', params: { id: taskgroup.id} }">Show</router-link>
+                            <button class="btn btn-danger btn-sm ml-2" @click="delete_task_group(taskgroup.id)">Delete</button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -45,7 +48,7 @@
 </template>
 
 <script>
-    import { get_task_groups_api } from "../services/api";
+    import { get_task_groups_api, delete_task_group_api } from "../services/api";
 
     export default {
         data() {
@@ -56,6 +59,11 @@
         methods: {
             go_back() {
                 this.$router.go(-1);
+            },
+            delete_task_group(id) {
+                delete_task_group_api(id).then(function() {
+                   location.reload();
+                });
             }
         },
         mounted: function() {

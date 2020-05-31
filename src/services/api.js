@@ -44,3 +44,7 @@ export const post_task_group_api = (name, description, frequence_type) => {
 
     return axios.post(TASKGROUP_URL, params, request_config);
 };
+
+export const delete_task_group_api = (id) => {
+    return axios.delete(TASKGROUP_URL + '/' + id.toString(), get_request_config());
+}
